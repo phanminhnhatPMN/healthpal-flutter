@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../theme/healthpal_theme.dart';
+import '../../../theme/healthpal_brand.dart';
 
 class AuthLayout extends StatelessWidget {
   const AuthLayout({
@@ -139,19 +140,7 @@ class _Brand extends StatelessWidget {
           ),
           const SizedBox(width: 12),
         ] else ...[
-          Container(
-            height: 42,
-            width: 42,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.82),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: const Icon(
-              CupertinoIcons.heart_fill,
-              color: Color(0xFFF05579),
-              size: 25,
-            ),
-          ),
+          const HealthPalLogo(),
           const SizedBox(width: 10),
         ],
         const Expanded(

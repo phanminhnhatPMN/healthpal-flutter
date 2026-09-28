@@ -48,6 +48,7 @@ void main() {
     await tapControl(tester, 'register-submit');
 
     expect(control('history-screen'), findsOneWidget);
+    await tapControl(tester, 'nav-history');
     expect(find.text('Lịch sử sức khỏe'), findsOneWidget);
     await binding.takeScreenshot('04-history');
 

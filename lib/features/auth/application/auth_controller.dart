@@ -38,6 +38,12 @@ class AuthController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateDisplayName(String name) {
+    if (_isDisposed || _user == null || name.trim().isEmpty) return;
+    _user = AuthUser(id: _user!.id, name: name.trim(), email: _user!.email);
+    notifyListeners();
+  }
+
   Future<bool> _run(Future<AuthUser?> Function() operation) async {
     if (_isDisposed || _isBusy) return false;
     _isBusy = true;

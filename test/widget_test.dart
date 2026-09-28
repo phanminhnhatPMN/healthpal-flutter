@@ -31,6 +31,10 @@ Future<void> tapControl(WidgetTester tester, String key) async {
   await tester.pumpAndSettle();
 }
 
+Future<void> openHistoryTab(WidgetTester tester) async {
+  await tapControl(tester, 'nav-history');
+}
+
 Future<void> enterField(WidgetTester tester, String key, String value) async {
   await tester.ensureVisible(control(key));
   await tester.enterText(control(key), value);
@@ -73,7 +77,7 @@ void main() {
     await tapControl(tester, 'login-submit');
 
     expect(control('history-screen'), findsOneWidget);
-    expect(find.text('Lịch sử sức khỏe'), findsOneWidget);
+    expect(control('dashboard-content'), findsOneWidget);
     expect(control('login-screen'), findsNothing);
   });
 
@@ -147,6 +151,7 @@ void main() {
     await tapControl(tester, 'register-submit');
 
     expect(control('history-screen'), findsOneWidget);
+    await openHistoryTab(tester);
     await tapControl(tester, 'history-account-menu');
     expect(find.text('Minh Anh'), findsOneWidget);
     expect(find.text('minh.anh@example.com'), findsOneWidget);
@@ -176,6 +181,7 @@ void main() {
     await enterField(tester, 'login-password', 'StrongPass123');
     await tapControl(tester, 'login-submit');
     expect(control('history-screen'), findsOneWidget);
+    await openHistoryTab(tester);
     await tapControl(tester, 'history-account-menu');
     expect(find.text('Minh Anh'), findsOneWidget);
   });
@@ -255,6 +261,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(control('history-screen'), findsOneWidget);
     expect(tester.takeException(), isNull);
+    await openHistoryTab(tester);
     await tapControl(tester, 'history-account-menu');
     await tapControl(tester, 'history-menu-logout');
     expect(tester.takeException(), isNull);

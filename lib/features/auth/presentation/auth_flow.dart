@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../application/auth_controller.dart';
 import '../../history/data/health_history_repository.dart';
-import '../../history/presentation/history_analytics_screen.dart';
+import '../../profile/data/profile_repository.dart';
+import '../../dashboard/data/health_connect_repository.dart';
+import '../../home/presentation/home_shell.dart';
+import '../../training/data/exercise_repository.dart';
+import '../../training/data/training_readiness_repository.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
 
@@ -12,10 +16,18 @@ class AuthFlow extends StatefulWidget {
     super.key,
     required this.controller,
     required this.historyRepository,
+    required this.profileRepository,
+    required this.dashboardRepository,
+    required this.trainingReadinessRepository,
+    required this.exerciseRepository,
   });
 
   final AuthController controller;
   final HealthHistoryRepository historyRepository;
+  final ProfileRepository profileRepository;
+  final HealthConnectRepository dashboardRepository;
+  final TrainingReadinessRepository trainingReadinessRepository;
+  final ExerciseRepository exerciseRepository;
 
   @override
   State<AuthFlow> createState() => _AuthFlowState();
@@ -67,10 +79,14 @@ class _AuthFlowState extends State<AuthFlow> {
         if (!didPop && _showRegister && !auth.isBusy) _showRegistration(false);
       },
       child: user != null
-          ? HistoryAnalyticsScreen(
+          ? HomeShell(
               key: const Key('history-screen'),
               authController: auth,
-              repository: widget.historyRepository,
+              historyRepository: widget.historyRepository,
+              profileRepository: widget.profileRepository,
+              dashboardRepository: widget.dashboardRepository,
+              trainingReadinessRepository: widget.trainingReadinessRepository,
+              exerciseRepository: widget.exerciseRepository,
               user: user,
             )
           : _showRegister

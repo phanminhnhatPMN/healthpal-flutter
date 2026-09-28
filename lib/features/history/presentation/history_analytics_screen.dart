@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../theme/healthpal_theme.dart';
+import '../../../theme/healthpal_brand.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../auth/domain/auth_user.dart';
 import '../application/history_controller.dart';
@@ -18,11 +19,13 @@ class HistoryAnalyticsScreen extends StatefulWidget {
     required this.authController,
     required this.repository,
     required this.user,
+    this.onOpenProfile,
   });
 
   final AuthController authController;
   final HealthHistoryRepository repository;
   final AuthUser user;
+  final VoidCallback? onOpenProfile;
 
   @override
   State<HistoryAnalyticsScreen> createState() => _HistoryAnalyticsScreenState();
@@ -194,6 +197,7 @@ class _HistoryAnalyticsScreenState extends State<HistoryAnalyticsScreen> {
           tooltip: 'Tài khoản',
           onSelected: (action) {
             if (action == _AccountAction.logout) unawaited(_confirmLogout());
+            if (action == _AccountAction.profile) widget.onOpenProfile?.call();
           },
           itemBuilder: (context) => [
             PopupMenuItem<_AccountAction>(
@@ -225,6 +229,17 @@ class _HistoryAnalyticsScreenState extends State<HistoryAnalyticsScreen> {
             ),
             const PopupMenuDivider(),
             const PopupMenuItem<_AccountAction>(
+              key: Key('history-menu-profile'),
+              value: _AccountAction.profile,
+              child: Row(
+                children: [
+                  Icon(CupertinoIcons.person_crop_circle, size: 20),
+                  SizedBox(width: 12),
+                  Text('Hồ sơ'),
+                ],
+              ),
+            ),
+            const PopupMenuItem<_AccountAction>(
               key: Key('history-menu-logout'),
               value: _AccountAction.logout,
               child: Row(
@@ -243,7 +258,7 @@ class _HistoryAnalyticsScreenState extends State<HistoryAnalyticsScreen> {
               color: Colors.white.withValues(alpha: 0.75),
               shape: BoxShape.circle,
             ),
-            child: const Icon(CupertinoIcons.person_fill, size: 21),
+            child: const HealthPalLogo(size: 48, borderRadius: 24),
           ),
         ),
       ],
@@ -756,7 +771,7 @@ class _HistoryAnalyticsScreenState extends State<HistoryAnalyticsScreen> {
   }
 }
 
-enum _AccountAction { logout }
+enum _AccountAction { profile, logout }
 
 class _SummaryValue extends StatelessWidget {
   const _SummaryValue({required this.label, required this.value});

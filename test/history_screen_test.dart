@@ -26,6 +26,8 @@ Future<void> openHistory(WidgetTester tester) async {
   await tester.tap(keyed('login-submit'));
   await tester.pumpAndSettle();
   expect(keyed('history-screen'), findsOneWidget);
+  await tester.tap(keyed('nav-history'));
+  await tester.pumpAndSettle();
 }
 
 Future<void> selectMetric(WidgetTester tester, String metric) async {
