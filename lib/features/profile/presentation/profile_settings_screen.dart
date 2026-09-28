@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../theme/healthpal_theme.dart';
+import '../../../theme/healthpal_brand.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../auth/domain/auth_user.dart';
 import '../application/profile_controller.dart';
@@ -346,21 +347,38 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     );
   }
 
-  Widget _header() => const Column(
+  Widget _header() => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        'Hồ sơ & cài đặt',
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.w800,
-          letterSpacing: -1,
+      const Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Hồ sơ & cài đặt',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w800,
+                letterSpacing: -1,
+              ),
+            ),
+            SizedBox(height: 7),
+            Text(
+              'Cá nhân hóa HealthPal theo cách của bạn.',
+              style: TextStyle(fontSize: 13, color: HealthPalColors.secondary),
+            ),
+          ],
         ),
       ),
-      SizedBox(height: 7),
-      Text(
-        'Cá nhân hóa HealthPal theo cách của bạn.',
-        style: TextStyle(fontSize: 13, color: HealthPalColors.secondary),
+      const SizedBox(width: 12),
+      Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.75),
+          shape: BoxShape.circle,
+        ),
+        child: const HealthPalLogo(size: 48, borderRadius: 24),
       ),
     ],
   );

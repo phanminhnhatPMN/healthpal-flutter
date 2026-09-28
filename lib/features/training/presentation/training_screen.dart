@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../theme/healthpal_theme.dart';
+import '../../../theme/healthpal_brand.dart';
 import '../application/exercise_library_controller.dart';
 import '../application/training_controller.dart';
 import '../data/exercise_repository.dart';
@@ -102,21 +103,38 @@ class _TrainingScreenState extends State<TrainingScreen> {
     );
   }
 
-  Widget _header() => const Column(
+  Widget _header() => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        'Tập luyện',
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.w800,
-          letterSpacing: -1,
+      const Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Tập luyện',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w800,
+                letterSpacing: -1,
+              ),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'Theo dõi mức sẵn sàng và tra cứu bài tập.',
+              style: TextStyle(color: HealthPalColors.secondary, fontSize: 14),
+            ),
+          ],
         ),
       ),
-      SizedBox(height: 6),
-      Text(
-        'Theo dõi mức sẵn sàng và tra cứu bài tập.',
-        style: TextStyle(color: HealthPalColors.secondary, fontSize: 14),
+      const SizedBox(width: 12),
+      Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.75),
+          shape: BoxShape.circle,
+        ),
+        child: const HealthPalLogo(size: 48, borderRadius: 24),
       ),
     ],
   );

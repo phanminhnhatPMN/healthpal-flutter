@@ -72,15 +72,25 @@ class _HomeShellState extends State<HomeShell> {
         padding: EdgeInsets.zero,
         child: Row(
           children: [
-            _navItem(0, Icons.dashboard_outlined, Icons.dashboard, 'Tổng quan'),
-            _navItem(1, Icons.insights_outlined, Icons.insights, 'Lịch sử'),
+            _navItem(
+              0,
+              Icons.dashboard_outlined,
+              Icons.dashboard_rounded,
+              'Tổng quan',
+            ),
+            _navItem(
+              1,
+              Icons.insights_outlined,
+              Icons.insights_rounded,
+              'Lịch sử',
+            ),
             _navItem(
               2,
               Icons.fitness_center_outlined,
-              Icons.fitness_center,
+              Icons.fitness_center_rounded,
               'Tập luyện',
             ),
-            _navItem(3, Icons.person_outline, Icons.person, 'Hồ sơ'),
+            _navItem(3, Icons.person_outline, Icons.person_rounded, 'Hồ sơ'),
           ],
         ),
       ),
